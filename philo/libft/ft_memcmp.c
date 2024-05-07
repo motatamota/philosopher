@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tashiget <tashiget@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 10:48:04 by tashiget          #+#    #+#             */
-/*   Updated: 2024/05/07 10:48:04 by tashiget         ###   ########.fr       */
+/*   Created: 2024/03/20 01:26:06 by tashiget          #+#    #+#             */
+/*   Updated: 2024/03/20 01:26:06 by tashiget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
-# include <stdio.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <string.h>
-# include "libft.h"
+#include "libft.h"
 
-typedef struct s_philo
+int	ft_memcmp(const void *buf1, const void *buf2, size_t count)
 {
-	int				num_philo;
-	int				who;
-	suseconds_t		eat_time;
-	suseconds_t		sleep_time;
-	suseconds_t		death_time;
-	struct timeval	*time;
-}	t_philo;
+	size_t			k;
+	unsigned char	*box;
+	unsigned char	*bot;
 
-#endif
+	box = (unsigned char *)buf1;
+	bot = (unsigned char *)buf2;
+	k = 0;
+	while (k < count)
+	{
+		if (*(box + k) != *(bot + k))
+			return (*(box + k) - *(bot + k));
+		k++;
+	}
+	return (0);
+}

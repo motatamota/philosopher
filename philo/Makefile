@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INCDIR = includes
 SRC = $(wildcard srcs/*.c)
 OBJ = $(SRC:%.c=%.o)
@@ -7,17 +7,21 @@ NAME = philosopher
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(CLIENT)
+$(NAME): $(OBJ) libft/libft.a
+	$(CC) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME)
 
-src/%.o: src/%.c
+srcs/%.o: srcs/%.c
 	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
 
+libft/libft.a:
+	make -C libft
+
 clean:
-	rm -f $(COBJ) $(SOBJ)
+	rm -f $(OBJ)
+	make -C libft fclean
 
 fclean: clean
-	rm -f client server
+	rm -f $(NAME)
 
 re: fclean all
 

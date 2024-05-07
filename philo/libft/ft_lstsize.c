@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tashiget <tashiget@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 10:48:04 by tashiget          #+#    #+#             */
-/*   Updated: 2024/05/07 10:48:04 by tashiget         ###   ########.fr       */
+/*   Created: 2024/03/20 07:29:32 by tashiget          #+#    #+#             */
+/*   Updated: 2024/03/20 07:29:32 by tashiget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
-# include <stdio.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <string.h>
-# include "libft.h"
+#include "libft.h"
 
-typedef struct s_philo
+int	ft_lstsize(t_list *lst)
 {
-	int				num_philo;
-	int				who;
-	suseconds_t		eat_time;
-	suseconds_t		sleep_time;
-	suseconds_t		death_time;
-	struct timeval	*time;
-}	t_philo;
+	int	count;
 
-#endif
+	count = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		count++;
+	}
+	return (count);
+}

@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tashiget <tashiget@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 10:48:04 by tashiget          #+#    #+#             */
-/*   Updated: 2024/05/07 10:48:04 by tashiget         ###   ########.fr       */
+/*   Created: 2024/03/20 07:26:10 by tashiget          #+#    #+#             */
+/*   Updated: 2024/03/20 07:26:10 by tashiget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
-# include <stdio.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <string.h>
-# include "libft.h"
+#include "libft.h"
 
-typedef struct s_philo
+t_list	*ft_lstnew(void *content)
 {
-	int				num_philo;
-	int				who;
-	suseconds_t		eat_time;
-	suseconds_t		sleep_time;
-	suseconds_t		death_time;
-	struct timeval	*time;
-}	t_philo;
+	t_list	*new;
 
-#endif
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	new->content = content;
+	new->next = 0;
+	return (new);
+}

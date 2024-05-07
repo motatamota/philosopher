@@ -1,33 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tashiget <tashiget@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 10:48:04 by tashiget          #+#    #+#             */
-/*   Updated: 2024/05/07 10:48:04 by tashiget         ###   ########.fr       */
+/*   Created: 2024/03/20 02:52:39 by tashiget          #+#    #+#             */
+/*   Updated: 2024/03/20 02:52:39 by tashiget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
-# include <stdio.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <string.h>
-# include "libft.h"
+#include "libft.h"
 
-typedef struct s_philo
+static void	set(long k, int fd)
 {
-	int				num_philo;
-	int				who;
-	suseconds_t		eat_time;
-	suseconds_t		sleep_time;
-	suseconds_t		death_time;
-	struct timeval	*time;
-}	t_philo;
+	char	c;
 
-#endif
+	if (k < 10)
+	{
+		c = k + '0';
+		write(fd, &c, 1);
+		return ;
+	}
+	set(k / 10, fd);
+	c = k % 10 + '0';
+	write(fd, &c, 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	k;
+
+	k = (long)n;
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		k = -k;
+	}
+	set(k, fd);
+}
+
+// int	main()
+// {
+// 	ft_putnbr_fd(-2147483648, 1);
+// }

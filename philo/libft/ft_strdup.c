@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tashiget <tashiget@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 10:48:04 by tashiget          #+#    #+#             */
-/*   Updated: 2024/05/07 10:48:04 by tashiget         ###   ########.fr       */
+/*   Created: 2024/03/20 01:26:32 by tashiget          #+#    #+#             */
+/*   Updated: 2024/03/20 01:26:32 by tashiget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
-# include <stdio.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <string.h>
-# include "libft.h"
+#include "libft.h"
 
-typedef struct s_philo
+char	*ft_strdup(const char *str)
 {
-	int				num_philo;
-	int				who;
-	suseconds_t		eat_time;
-	suseconds_t		sleep_time;
-	suseconds_t		death_time;
-	struct timeval	*time;
-}	t_philo;
+	size_t	n;
+	size_t	len;
+	char	*box;
 
-#endif
+	len = ft_strlen(str);
+	box = (char *)malloc(sizeof(char) * (len + 1));
+	if (box == 0)
+		return (0);
+	n = 0;
+	while (n < len)
+	{
+		*(box + n) = *(str + n);
+		n++;
+	}
+	*(box + n) = '\0';
+	return (box);
+}

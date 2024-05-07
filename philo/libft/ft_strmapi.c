@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tashiget <tashiget@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 10:48:04 by tashiget          #+#    #+#             */
-/*   Updated: 2024/05/07 10:48:04 by tashiget         ###   ########.fr       */
+/*   Created: 2024/03/20 02:42:22 by tashiget          #+#    #+#             */
+/*   Updated: 2024/03/20 02:42:22 by tashiget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
-# include <stdio.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <string.h>
-# include "libft.h"
+#include "libft.h"
 
-typedef struct s_philo
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int				num_philo;
-	int				who;
-	suseconds_t		eat_time;
-	suseconds_t		sleep_time;
-	suseconds_t		death_time;
-	struct timeval	*time;
-}	t_philo;
+	unsigned int	n;
+	char			*box;
+	size_t			len;
 
-#endif
+	if (s == 0 || f == 0)
+		return (0);
+	len = ft_strlen(s);
+	box = (char *)malloc(sizeof(char) * (len + 1));
+	if (!box)
+		return (0);
+	n = 0;
+	while (n < len)
+	{
+		*(box + n) = f(n, *(s + n));
+		n++;
+	}
+	*(box + n) = '\0';
+	return (box);
+}
