@@ -24,6 +24,7 @@ typedef struct s_philo
 {
 	int				num_philo;
 	int				who;
+	int				death_flag;
 	suseconds_t		eat_time;
 	suseconds_t		sleep_time;
 	suseconds_t		death_time;

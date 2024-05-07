@@ -45,12 +45,9 @@ int	threadcre(t_philo *st)
 			return (1);
 		n++;
 	}
-	n = 0;
-	while (n < st->num_philo)
-	{
+	n = -1;
+	while (++n < st->num_philo)
 		pthread_join(*(thread + n), NULL);
-		n++;
-	}
 	free(thread);
 	return (0);
 }
@@ -67,6 +64,7 @@ int	main(int ac, char **av)
 	st.eat_time = ft_atoi(*(av + 3));
 	st.sleep_time = ft_atoi(*(av + 4));
 	st.time = &time;
+	st.death_flag = 0;
 	if (threadcre(&st))
 		return (1);
 	return (0);
