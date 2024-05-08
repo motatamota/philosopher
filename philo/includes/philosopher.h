@@ -29,6 +29,7 @@ typedef struct s_philo
 	suseconds_t		sleep_time;
 	suseconds_t		death_time;
 	struct timeval	*time;
+	pthread_mutex_t	*mutex;
 }	t_philo;
 
 #endif

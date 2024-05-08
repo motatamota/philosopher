@@ -18,22 +18,29 @@ void	*philosopher(void *cal)
 	struct timeval time;
 
 	st = (t_philo *)cal;
-	gettimeofday(&time, NULL);
-	usleep(1000000 - (time.tv_usec - st->time->tv_usec) + st->who * 300);
-	printf("success!%d\n", st->who);
+	gettimeofday(st->time, NULL);
+	if (st->who % 2)
+		usleep(300);
+	while (1)
+	{
+		take_eat(st);
+		take_sleep(st);
+		take_think(st);
+	}
 	free(st);
 	return (NULL);
 }
 
 int	threadcre(t_philo *st)
 {
-	int			n;
-	pthread_t	*thread;
-	t_philo		*cp;
+	int				n;
+	pthread_t		*thread;
+	t_philo			*cp;
 
 	n = 0;
 	gettimeofday(st->time, NULL);
 	thread = (pthread_t *)malloc(sizeof(pthread_t) * st->num_philo);
+	st->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * st->num_philo);
 	if (!thread)
 		return (1);
 	while (n < st->num_philo)
@@ -42,6 +49,8 @@ int	threadcre(t_philo *st)
 		cp = (t_philo *)malloc(sizeof(t_philo));
 		ft_memcpy(cp, st, sizeof(t_philo));
 		if (pthread_create(thread + n, NULL, philosopher, (void *)cp))
+			return (1);
+		if (pthread_mutex_init((st->mutex) + n, NULL))
 			return (1);
 		n++;
 	}
@@ -66,7 +75,10 @@ int	main(int ac, char **av)
 	st.time = &time;
 	st.death_flag = 0;
 	if (threadcre(&st))
+	{
+		free_philo();
 		return (1);
+	}
 	return (0);
 }
 
