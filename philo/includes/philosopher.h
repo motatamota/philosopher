@@ -25,11 +25,18 @@ typedef struct s_philo
 	int				num_philo;
 	int				who;
 	int				death_flag;
-	suseconds_t		eat_time;
-	suseconds_t		sleep_time;
-	suseconds_t		death_time;
-	struct timeval	*time;
+	int				eat_time;
+	int				sleep_time;
+	int				death_time;
+	struct timeval	time;
+	struct timeval	time2;
+	struct timeval	*time3;
+	pthread_t		*thread;
 	pthread_mutex_t	*mutex;
 }	t_philo;
 
+void	take_eat(t_philo *st);
+void	take_sleep(t_philo *st);
+void	take_think(t_philo *st);
+void	imchecker(t_philo *st);
 #endif
