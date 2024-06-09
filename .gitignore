@@ -1,0 +1,4 @@
+philosopher
+*.o
+.DSstore
+*.a
