@@ -24,7 +24,7 @@ typedef struct s_philo
 {
 	int				num_philo;
 	int				who;
-	int				death_flag;
+	int				*death_flag;
 	int				eat_time;
 	int				sleep_time;
 	int				death_time;
@@ -33,10 +33,14 @@ typedef struct s_philo
 	struct timeval	*time3;
 	pthread_t		*thread;
 	pthread_mutex_t	*mutex;
+	int				left;
+	int				right;
+	int				*eating;
+	int				error;
 }	t_philo;
 
 void	take_eat(t_philo *st);
 void	take_sleep(t_philo *st);
-void	take_think(t_philo *st);
 void	imchecker(t_philo *st);
+long	timecal(struct timeval time1, struct timeval time2);
 #endif
