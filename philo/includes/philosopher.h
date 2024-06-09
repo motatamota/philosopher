@@ -37,10 +37,17 @@ typedef struct s_philo
 	int				right;
 	int				*eating;
 	int				error;
+	int				*count;
 }	t_philo;
 
 void	take_eat(t_philo *st);
 void	take_sleep(t_philo *st);
 void	imchecker(t_philo *st);
 long	timecal(struct timeval time1, struct timeval time2);
+int		ft_error(int ac, char **av, t_philo *st);
+void	destroy_mutex(t_philo *st);
+int		threadcre(t_philo *st);
+int		initst(t_philo *st);
+void	set_lr(t_philo *st);
+void	*philosopher(void *cal);
 #endif
