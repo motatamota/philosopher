@@ -19,7 +19,8 @@ void	destroy_mutex(t_philo *st)
 	n = 0;
 	while (n < st->num_philo)
 	{
-		pthread_mutex_destroy(&st->mutex[n]);
+		if (st->m_flag)
+			pthread_mutex_destroy(&st->mutex[n]);
 		n++;
 	}
 	free(st->mutex);
@@ -72,6 +73,7 @@ int	threadcre(t_philo *st)
 		threadcre3(cp, n);
 		n++;
 	}
+	st->m_flag = 1;
 	n = -1;
 	while (++n <= st->num_philo)
 		pthread_join(*(st->thread + n), NULL);

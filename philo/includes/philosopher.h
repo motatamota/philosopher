@@ -38,6 +38,7 @@ typedef struct s_philo
 	int				*eating;
 	int				error;
 	int				*count;
+	int				m_flag;
 }	t_philo;
 
 void	take_eat(t_philo *st);

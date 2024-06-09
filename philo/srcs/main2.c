@@ -57,9 +57,20 @@ void	set_time3(t_philo *st)
 	}
 }
 
+void	zeroall(t_philo *st)
+{
+	st->thread = NULL;
+	st->mutex = NULL;
+	st->time3 = NULL;
+	st->eating = NULL;
+	st->death_flag = NULL;
+}
+
 int	initst(t_philo *st)
 {
+	st->m_flag = 0;
 	gettimeofday(&st->time, NULL);
+	zeroall(st);
 	st->thread = (pthread_t *)malloc(sizeof(pthread_t) * (st->num_philo + 1));
 	st->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* st->num_philo);

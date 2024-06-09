@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 INCDIR = includes
-SRC = $(wildcard srcs/*.c)
+SRC = srcs/ck.c srcs/main.c srcs/main2.c srcs/move.c srcs/thread.c
 OBJ = $(SRC:%.c=%.o)
 NAME = philosopher
 
