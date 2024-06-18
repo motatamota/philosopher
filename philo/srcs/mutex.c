@@ -56,7 +56,8 @@ int	initmutex(t_philo *st)
 {
 	st->m_death_flag = &st->m_death_flag_i;
 	st->m_count = &st->m_count_i;
-	if (pthread_mutex_init(st->m_death_flag, NULL) || pthread_mutex_init(st->m_count, NULL))
+	if (pthread_mutex_init(st->m_death_flag, NULL)
+		|| pthread_mutex_init(st->m_count, NULL))
 		return (1);
 	return (0);
 }
