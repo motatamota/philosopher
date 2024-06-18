@@ -18,8 +18,7 @@ void	imchecker(t_philo *st)
 
 	while (1)
 	{
-		usleep(10000);
-		if (*st->death_flag)
+		if (ch_deathflag(st))
 			break ;
 		gettimeofday(&st->time2, NULL);
 		n = 0;
@@ -28,15 +27,17 @@ void	imchecker(t_philo *st)
 			if (timecal(st->time3[n], st->time2)
 				> st->death_time && !st->eating[n])
 			{
-				*st->death_flag = 1;
+				sum_deathflag(st, 1);
 				printf("%ld %d is died\n", timecal(st->time, st->time2), n + 1);
 				free(st);
+				st = NULL;
 				return ;
 			}
 			n++;
 		}
 	}
 	free(st);
+	st = NULL;
 }
 
 long	timecal(struct timeval time1, struct timeval time2)

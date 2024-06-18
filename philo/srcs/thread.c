@@ -17,13 +17,26 @@ void	destroy_mutex(t_philo *st)
 	int	n;
 
 	n = 0;
-	while (n < st->num_philo)
+	while (n < st->num_philo && st->m_flag)
 	{
-		if (st->m_flag)
-			pthread_mutex_destroy(&st->mutex[n]);
+		pthread_mutex_destroy(&st->mutex[n]);
 		n++;
 	}
 	free(st->mutex);
+}
+
+void	destroy_mutex_eating(t_philo *st)
+{
+	int	n;
+
+	n = 0;
+	while (n < st->num_philo)
+	{
+		if (st->m_flag)
+			pthread_mutex_destroy(&st->m_eating[n]);
+		n++;
+	}
+	free(st->m_eating);
 }
 
 t_philo	*threadcre2(t_philo *st, int n)
@@ -40,16 +53,19 @@ t_philo	*threadcre2(t_philo *st, int n)
 
 int	threadcre3(t_philo *cp, int n)
 {
-	if (n != cp->num_philo && (pthread_mutex_init((cp->mutex) + n, NULL)
+	if (n != cp->num_philo && (pthread_mutex_init(cp->mutex + n, NULL)
+			|| pthread_mutex_init(cp->m_eating + n, NULL)
 			|| pthread_create(cp->thread + n, NULL, philosopher, (void *)cp)))
 	{
 		free(cp);
+		cp = 0;
 		return (1);
 	}
 	else if (n == cp->num_philo && pthread_create(cp->thread + n, NULL,
 			philosopher, (void *)cp))
 	{
 		free(cp);
+		cp = 0;
 		return (1);
 	}
 	return (0);
@@ -70,7 +86,8 @@ int	threadcre(t_philo *st)
 		if (!cp)
 			return (1);
 		ft_memcpy(cp, st, sizeof(t_philo));
-		threadcre3(cp, n);
+		if (threadcre3(cp, n))
+			return (1);
 		n++;
 	}
 	st->m_flag = 1;

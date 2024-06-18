@@ -24,13 +24,15 @@ void	*philosopher(void *cal)
 	}
 	while (1)
 	{
-		if (*st->death_flag || st->error)
+		if (ch_deathflag(st) || st->error)
 			break ;
 		take_eat(st);
 		take_sleep(st);
 	}
 	usleep(2000000);
-	free(st);
+	if (st)
+		free(st);
+	st = NULL;
 	return (NULL);
 }
 
@@ -64,15 +66,17 @@ void	free_philo(t_philo *st)
 		free(st->death_flag);
 	if (st->count)
 		free(st->count);
+	if (st->m_eating)
+		destroy_mutex_eating(st);
+	all_zero(st);
 }
 
 void	onetry(t_philo *st)
 {
 	printf("0 1 has taken a fork\n");
-	printf("0 1 has taken a fork\n");
-	printf("0 1 is eating\n");
 	usleep(st->death_time * 1000);
 	printf("%d is died\n", st->death_time);
+	free(st->count);
 }
 
 int	main(int ac, char **av)

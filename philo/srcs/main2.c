@@ -69,7 +69,6 @@ void	zeroall(t_philo *st)
 int	initst(t_philo *st)
 {
 	st->m_flag = 0;
-	gettimeofday(&st->time, NULL);
 	zeroall(st);
 	st->thread = (pthread_t *)malloc(sizeof(pthread_t) * (st->num_philo + 1));
 	st->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
@@ -78,8 +77,10 @@ int	initst(t_philo *st)
 			* st->num_philo);
 	st->eating = (int *)malloc(sizeof(int) * st->num_philo);
 	st->death_flag = (int *)malloc(sizeof(int));
+	st->m_eating = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* st->num_philo);
 	if (!st->thread || !st->mutex || !st->time3 || !st->eating
-		|| !st->death_flag)
+		|| !st->death_flag || !st->m_eating || initmutex(st))
 		return (1);
 	*st->death_flag = 0;
 	memset(st->eating, 0, sizeof(int) * st->num_philo);
