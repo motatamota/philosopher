@@ -28,7 +28,8 @@ void	imchecker(t_philo *st)
 				> st->death_time && !st->eating[n])
 			{
 				sum_deathflag(st, 1);
-				printf("%ld %d is died\n", timecal(st->time, st->time2), n + 1);
+				printf("%ld %d is died\n",
+					timecal(st->time, st->time2) + 1, n + 1);
 				free(st);
 				st = NULL;
 				return ;
