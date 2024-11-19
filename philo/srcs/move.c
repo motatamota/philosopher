@@ -24,7 +24,7 @@ void	take_eat2(t_philo *st)
 	st->eating[st->who - 1] = 1;
 	printf("%ld %d is eating\n",
 		timecal(st->time, st->time3[st->who - 1]), st->who);
-	usleep(st->eat_time * 1000);
+	ft_sleep(st->eat_time * 1000, st->time3[st->who - 1]);
 	st->eating[st->who - 1] = 0;
 	pthread_mutex_unlock(&st->m_eating[st->who - 1]);
 	pthread_mutex_unlock(&st->mutex[st->right]);
@@ -61,5 +61,11 @@ void	take_sleep(t_philo *st)
 	if (ch_deathflag(st))
 		return ;
 	printf("%ld %d is sleeping\n", timecal(st->time, st->time2), st->who);
-	usleep(st->sleep_time * 1000);
+	ft_sleep(st->sleep_time * 1000, st->time2);
 }
+
+// void	initsleep(t_philo *st)
+// {
+// 	if (st->who % 2)
+
+// }

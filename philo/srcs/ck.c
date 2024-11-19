@@ -25,11 +25,11 @@ void	imchecker(t_philo *st)
 		while (n < st->num_philo)
 		{
 			if (timecal(st->time3[n], st->time2)
-				> st->death_time && !st->eating[n])
+				> st->death_time + 10 && !st->eating[n])
 			{
 				sum_deathflag(st, 1);
 				printf("%ld %d is died\n",
-					timecal(st->time, st->time2) + 1, n + 1);
+					timecal(st->time, st->time2), n + 1);
 				free(st);
 				st = NULL;
 				return ;
@@ -45,4 +45,12 @@ long	timecal(struct timeval time1, struct timeval time2)
 {
 	return ((time2.tv_usec - time1.tv_usec) / 1000
 		+ (time2.tv_sec - time1.tv_sec) * 1000);
+}
+
+void	ft_sleep(long time, struct timeval from)
+{
+	struct timeval	to;
+
+	gettimeofday(&to, NULL);
+	usleep(time - timecal(from, to) + 2000);
 }

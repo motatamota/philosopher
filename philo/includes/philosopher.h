@@ -67,4 +67,5 @@ int		initmutex(t_philo *st);
 void	all_zero(t_philo *st);
 int		ch_left(t_philo *st);
 int		ch_right(t_philo *st);
+void	ft_sleep(long time, struct timeval from);
 #endif

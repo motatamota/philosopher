@@ -18,7 +18,6 @@ int	ch_right2(t_philo *st)
 		&& timecal(st->time3[st->who], st->time3[st->who - 1]) > 0)
 	{
 		pthread_mutex_unlock(&st->mutex[st->right]);
-		usleep(1000);
 		if (ch_deathflag(st))
 			return (1);
 		pthread_mutex_lock(&st->mutex[st->right]);
@@ -27,7 +26,6 @@ int	ch_right2(t_philo *st)
 		&& timecal(st->time3[0], st->time3[st->who - 1]) > 0)
 	{
 		pthread_mutex_unlock(&st->mutex[st->right]);
-		usleep(1000);
 		if (ch_deathflag(st))
 			return (1);
 		pthread_mutex_lock(&st->mutex[st->right]);
@@ -47,7 +45,6 @@ int	ch_right(t_philo *st)
 		if (timecal(st->time3[st->who - 2], st->time3[st->who - 1]) > 0)
 		{
 			pthread_mutex_unlock(&st->mutex[st->right]);
-			usleep(1000);
 			if (ch_deathflag(st))
 				return (1);
 			pthread_mutex_lock(&st->mutex[st->right]);
@@ -62,7 +59,6 @@ int	ch_left2(t_philo *st)
 		&& timecal(st->time3[st->who - 2], st->time3[st->who - 1]) > 0)
 	{
 		pthread_mutex_unlock(&st->mutex[st->left]);
-		usleep(1000);
 		if (ch_deathflag(st))
 			return (1);
 		pthread_mutex_lock(&st->mutex[st->left]);
@@ -71,7 +67,6 @@ int	ch_left2(t_philo *st)
 		&& timecal(st->time3[st->num_philo - 1], st->time3[st->who - 1]) > 0)
 	{
 		pthread_mutex_unlock(&st->mutex[st->left]);
-		usleep(1000);
 		if (ch_deathflag(st))
 			return (1);
 		pthread_mutex_lock(&st->mutex[st->left]);
@@ -89,7 +84,6 @@ int	ch_left(t_philo *st)
 			&& timecal(st->time3[st->who], st->time3[st->who - 1]) > 0)
 		{
 			pthread_mutex_unlock(&st->mutex[st->left]);
-			usleep(1000);
 			if (ch_deathflag(st))
 				return (1);
 			pthread_mutex_lock(&st->mutex[st->left]);
@@ -98,7 +92,6 @@ int	ch_left(t_philo *st)
 			&& timecal(st->time3[0], st->time3[st->who - 1]) > 0)
 		{
 			pthread_mutex_unlock(&st->mutex[st->left]);
-			usleep(1000);
 			if (ch_deathflag(st))
 				return (1);
 			pthread_mutex_lock(&st->mutex[st->left]);
