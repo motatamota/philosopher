@@ -29,7 +29,7 @@ void	*philosopher(void *cal)
 		take_eat(st);
 		take_sleep(st);
 	}
-	usleep(2000000);
+	usleep(200000);
 	if (st)
 		free(st);
 	st = NULL;
